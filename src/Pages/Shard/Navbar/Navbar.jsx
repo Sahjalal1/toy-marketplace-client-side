@@ -20,15 +20,6 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {/* <div className="hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1 font-semibold">
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/alltoys'>All Toys</Link></li>
-                        <li><Link to='/mytoys'>My Toys</Link></li>
-                        <li><Link to='/addtoy'>Add A Toy</Link></li>
-                        <li><Link to='/blogs'>Blogs</Link></li>
-                    </ul>
-                </div> */}
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                         <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
