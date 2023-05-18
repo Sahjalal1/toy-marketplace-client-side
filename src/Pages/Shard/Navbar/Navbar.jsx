@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-[#9090ff]">
             <div className="navbar-start">
                 <img className="w-40 h-20" src="https://i.ibb.co/t2H8GbJ/132151333-toy-store-modern-brush-lettering-text-vector-illustration-logo-for-print-and-advertising.webp" alt="" />
             </div>
