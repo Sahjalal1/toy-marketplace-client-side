@@ -16,6 +16,18 @@ const AddToy = () => {
         const quantity =form.quantity.value;
         const description =form.description.value;
         console.log(photo, toyname, category, price, rating, sellername, selleremail, quantity, description)
+        
+        const newToys = { photo, toyname, category, price, rating, sellername, selleremail, quantity, description }
+        
+        fetch('http://localhost:5000/toys', {
+            method: "POST",
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(newToys)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
     }
 
     return (
