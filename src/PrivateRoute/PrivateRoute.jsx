@@ -5,18 +5,18 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({children}) => {
 
-    const {user} = useContext(AuthContext)
+    const {user, loading} = useContext(AuthContext)
     const location = useLocation()
 
-    // if (loading) {
-    //     return <progress className="progress w-56 mx-auto my-52"></progress>
-    // }
+    if (loading) {
+        return <progress className="progress w-56 mx-auto my-52"></progress>
+    }
 
     if (user) {
         return children;
     }
 
-    return <Navigate state={{ from: location }} to={'/home'} replace></Navigate>
+    return <Navigate state={{ from: location }} to={'/'} replace></Navigate>
 };
 
 export default PrivateRoute;

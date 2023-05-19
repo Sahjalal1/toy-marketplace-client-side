@@ -1,16 +1,53 @@
+import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import app from "../../firebase/firebase.config";
+
+const auth = getAuth(app)
 
 const Login = () => {
+    const { signIn } = useContext(AuthContext)
 
-    const handleLogin = event =>{
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
+
+    const navigate = useNavigate()
+
+    const googleProvider = new GoogleAuthProvider()
+
+
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                navigate(from)
+            })
+            .catch(error => console.log(error))
+
+    }
+
+    const handleLogin = event => {
         event.preventDefault()
 
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+        signIn(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+                navigate(from)
+                form.reset()
 
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -37,8 +74,8 @@ const Login = () => {
 
                         <h1 className="text-center mt-4">-----OR LOGIN WITH-----</h1>
                         <div className="text-center">
-                            <button className="btn btn-outline btn-error"><FaGoogle /></button>
-                            
+                            <button onClick={handleGoogleSignIn} className="btn btn-outline btn-error"><FaGoogle /></button>
+
                         </div>
                         <h1 className="text-center">Don`t have an account?<Link to='/signup' className="link link-error">Sign Up</Link></h1>
                     </form>

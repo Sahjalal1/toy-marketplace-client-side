@@ -1,8 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 
 const Navbar = () => {
 
+    const { user, logOut } = useContext(AuthContext)
+    console.log(user)
+
+    const logout = ()=>{
+        logOut()
+    }
     return (
         <div className="navbar bg-[#9090ff]">
             <div className="navbar-start">
@@ -10,21 +18,35 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                <ul className="menu menu-horizontal px-1 font-semibold">
+                    <ul className="menu menu-horizontal px-1 font-semibold">
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/alltoys'>All Toys</Link></li>
-                        <li><Link to='/mytoys'>My Toys</Link></li>
-                        <li><Link to='/addtoy'>Add A Toy</Link></li>
+                        {
+                            user && <li><Link to='/mytoys'>My Toys</Link></li>
+                        }
+                        {
+                            user && <li><Link to='/addtoy'>Add A Toy</Link></li>
+                        }
                         <li><Link to='/blogs'>Blogs</Link></li>
                     </ul>
                 </ul>
             </div>
             <div className="navbar-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
+                
+                    {/* <div className="w-10 rounded-full">
                         <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    </div>
-                </label>
+                    </div> */}
+                    {
+                        user ?
+                            <div className="flex items-center gap-5 mr-5">
+                                <div className="w-10 rounded-full">
+                                    <img title={user.displayName} src={user.photoURL} />
+                                </div>
+                               <div> <button onClick={logout}>LogOut</button></div>
+                            </div>
+                            : <Link className="lg:mr-12" to='/login'>Login</Link>
+                    }
+                
 
                 {/* mobile navbar start*/}
                 <div className="dropdown dropdown-end">
@@ -34,8 +56,12 @@ const Navbar = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/alltoys'>All Toys</Link></li>
-                        <li><Link to='/mytoys'>My Toys</Link></li>
-                        <li><Link to='/addtoy'>Add A Toy</Link></li>
+                        {
+                            user && <li><Link to='/mytoys'>My Toys</Link></li>
+                        }
+                        {
+                            user && <li><Link to='/addtoy'>Add A Toy</Link></li>
+                        }
                         <li><Link to='/blogs'>Blogs</Link></li>
                     </ul>
                 </div>
