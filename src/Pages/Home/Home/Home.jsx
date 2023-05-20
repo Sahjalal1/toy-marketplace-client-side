@@ -5,33 +5,34 @@ import ByCategory from "./byCategory/byCategory";
 
 
 const Home = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      };
-  
+
+
     return (
         <div>
             {/* ---------Banar Section start--------------- */}
-            <div className="hero h-[600px]" style={{ backgroundImage: `url("https://img.freepik.com/premium-photo/wooden-car-toys-blue-background-car-toys-background_423236-194.jpg?size=626&ext=jpg&ga=GA1.1.1128138535.1684335108&semt=ais")` }}>
-                <div className=" bg-opacity-60"></div>
-                <div className="hero-content text-center text-neutral-content">
-                    <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                        <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary">Get Started</button>
-                    </div>
-                </div>
-            </div>
+            <div className="hero h-[600px]" style={{ backgroundImage: `url("https://i.ibb.co/68zvjPY/istockphoto-1332097112-170667a.jpg")` }}>
 
+                <div className="flex gap-40">
+                    <div className="card-body text-white">
+                        <h2 className="text-5xl font-semibold">Toy Cars!</h2>
+                        <p className="text-3xl">Welcome to my toy shop. <br /> Here you will find one of the world toy cars</p>
+                        <div className="card-actions ">
+                            <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">All Toys</button>
+                        </div>
+                    </div>
+                    <figure><img src="https://freepngimg.com/thumb/porsche/22132-5-silver-porsche.png" alt="Movie" /></figure>
+
+                </div>
+                
+            </div>
+            <div className="pt-1  bg-[#52fff3]">
+                        
+                </div>
             {/* --------- Banar Section end --------------- */}
 
             {/* --------- Gallery Section start --------------------*/}
 
-           <Gallery></Gallery>
+            <Gallery></Gallery>
 
             {/* --------- Gallery Section end --------------------*/}
 
@@ -46,3 +47,6 @@ const Home = () => {
                         <a href="#slide2" className="btn btn-circle">❯</a>
                     </div> */}
 export default Home;
+
+
+{/* <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">Get Started</button> */ }
