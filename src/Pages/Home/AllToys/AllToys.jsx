@@ -10,7 +10,7 @@ const AllToys = () => {
 
     useEffect(() => {
         
-        fetch('http://localhost:5000/toys')
+        fetch('https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toys')
             .then(res => res.json())
             .then(data => {
                 const something = data.slice(0, 20)

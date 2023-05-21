@@ -19,7 +19,7 @@ const AddToy = () => {
         
         const newToys = { photo, toyname, category, price, rating, sellername, selleremail, quantity, description }
         
-        fetch('http://localhost:5000/toys', {
+        fetch('https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toys', {
             method: "POST",
             headers: {
                 'content-type' : 'application/json'

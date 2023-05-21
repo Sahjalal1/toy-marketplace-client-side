@@ -10,7 +10,7 @@ const ByCategory = () => {
     const [tavcategry, setTavcategry] = useState('regular-car')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/toyscategory/${tavcategry}`)
+        fetch(`https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toyscategory/${tavcategry}`)
             .then(res => res.json())
             .then(data => {
                 const something = data.slice(1, 3)
