@@ -2,10 +2,6 @@ import {  useEffect, useState } from "react";
 // import { AuthContext } from "../../../Providers/AuthProviders";
 
 
-
-
-
-
 const AllToys = () => {
 // const {loading} = useContext(AuthContext)
 
@@ -17,8 +13,8 @@ const AllToys = () => {
         fetch('http://localhost:5000/toys')
             .then(res => res.json())
             .then(data => {
-                const datas = data.slice(0, 20)
-                setToys(datas)
+                const something = data.slice(0, 20)
+                setToys(something)
                 setAllToys(data)
             })
     }, [])
@@ -35,7 +31,7 @@ const AllToys = () => {
     return (
         <>
             <div>
-                <div className="overflow-x-auto w-full">
+                <div className="overflow-x-auto w-[100%]">
                     <table className="table w-full">
 
                         <thead>

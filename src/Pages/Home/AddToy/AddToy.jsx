@@ -28,6 +28,7 @@ const AddToy = () => {
         })
         .then(res => res.json())
         .then(data => console.log(data))
+        
     }
 
     return (
@@ -35,7 +36,7 @@ const AddToy = () => {
 
 
             <form onSubmit={handleSubmit} className="w-[80%]  lg:py-10 lg:px-16 mx-auto" >
-                <h1 className="text-3xl text-center font-extrabold">AddCoffee</h1>
+                <h1 className="text-3xl text-white text-center py-8 lg:py-0 font-extrabold">Add a New Toy</h1>
             {/* img URL div */}
                 <div className="md:flex mb-7">
                     <div className="form-control md:w-full ">
@@ -119,7 +120,7 @@ const AddToy = () => {
                         <label className="input-group">
                             <input type="text" name="quantity" placeholder="Available quantity " className="input input-bordered input-accent w-full " />
                         </label>
-                        <input className="mt-12 py-5 text-xl font-semibold  text-black bg-[#52fff3] hover:bg-[#34b4ac] rounded-md" type="submit" value="Add TOY" />
+                        <input className="mt-12 mb-10 lg:mb-0 py-5 text-xl font-semibold  text-black bg-[#52fff3] hover:bg-[#34b4ac] rounded-md" type="submit" value="Add TOY" />
                     </div>
                 </div>
 
