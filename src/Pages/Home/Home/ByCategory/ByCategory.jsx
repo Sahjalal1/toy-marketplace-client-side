@@ -34,11 +34,11 @@ const ByCategory = () => {
                     </TabList>
                 </div>
 
-                <div className='my-16 grid grid-cols-2'>
+                <div className='my-16 grid lg:gap-4 lg:grid-cols-2'>
                     <TabPanel>
                         {
                             categorys.map(category =>
-                                <div key={category._id} className="card card-compact w-[40%]  bg-base-100 mt-16 lg:mt-0 shadow-xl">
+                                <div key={category._id} className="card  w-[90%] mx-auto lg:w-[80%]  bg-base-100  shadow-xl">
                                     <figure><img src={category.photo} alt="Shoes" /></figure>
                                     <div className="card-body">
                                         {category._id}

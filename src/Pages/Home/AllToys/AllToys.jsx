@@ -1,15 +1,16 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import { AuthContext } from "../../../Providers/AuthProviders";
 
 
 const AllToys = () => {
-// const {loading} = useContext(AuthContext)
+    // const {loading} = useContext(AuthContext)
 
     const [alltoys, setAllToys] = useState([])
     const [toys, setToys] = useState([])
+    const [details, setDetails] = useState([])
 
     useEffect(() => {
-        
+
         fetch('https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toys')
             .then(res => res.json())
             .then(data => {
@@ -19,15 +20,11 @@ const AllToys = () => {
             })
     }, [])
 
-    const haha = () => {
+    const alldata = () => {
         setToys(alltoys)
     }
 
 
-    const model = id =>{
-        const fl = alltoys.filter(alltoys._id === id)
-        console.log(fl)
-    }
     return (
         <>
             <div>
@@ -65,7 +62,7 @@ const AllToys = () => {
                                         {toy.quantity}
                                     </th>
                                     <th>
-                                        <label onClick={()=> model (toy._id)} htmlFor="my-modal-5" className="btn btn-outline btn-error">Toys Details</label>
+                                        <label onClick={() => setDetails(toy)} htmlFor="my-modal" className="btn btn-outline btn-error">Toys Details</label>
                                     </th>
                                 </tr>
 
@@ -79,21 +76,34 @@ const AllToys = () => {
 
             {/* <button onClick={haha}>fkdjf</button> */}
             <div className="w-40 mx-auto">
-                <button onClick={haha} className="btn">All Toys</button>
+                <button onClick={alldata} className="btn">All Toys</button>
             </div>
 
 
             {/* Put this part before </body> tag */}
-            <input type="checkbox" id="my-modal-5" className="modal-toggle" />
+            <input type="checkbox" id="my-modal" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box w-11/12 max-w-5xl">
-                    <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-                    <p className="py-4"> been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                <div className="modal-box ">
+                        <figure><img className="w-[500px] h-[300px] rounded-sm" src={details.photo} alt="Shoes" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">
+                            <span className="font-extrabold">Toy Name:</span> {details.toyname}
+                            <div className="badge badge-secondary">NEW</div>
+                        </h2>
+                        <h1><span className="font-extrabold">Seller Name:</span>{details.sellername}</h1>
+                        <h1><span className="font-extrabold">Seller Email:</span> {details.selleremail}</h1>
+                        <div className="flex justify-between">
+                            <h2><span className="font-extrabold">Price:</span> {details.price}$</h2>
+                            <h2><span className="font-extrabold">Rating:</span> {details.rating}</h2>
+                        </div>
+                        <h1><span className="font-extrabold">Quantity:</span> {details.quantity}</h1>
+                        <p><span className="font-extrabold">description:</span> {details.description}</p>
+                    </div>
                     <div className="modal-action">
-                        <label htmlFor="my-modal-5" className="btn">Yay!</label>
+                        <label htmlFor="my-modal" className="btn">colse!</label>                        
                     </div>
                 </div>
-            </div>
+            </div >
         </>
 
     );

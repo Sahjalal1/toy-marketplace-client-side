@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 
@@ -9,8 +10,9 @@ const MyToys = () => {
     const { user } = useContext(AuthContext)
 
     const [mytoys, setMytoys] = useState([])
- 
+
     const [edit, setEdit] = useState([])
+    const [am, setAm] = useState([])
 
 
 
@@ -23,7 +25,7 @@ const MyToys = () => {
                 setMytoys(data);
                 // navigate(from)
             });
-    }, [user]);
+    }, [user, am]);
 
     const handelMyToy = event => {
         // console.log(event.target)
@@ -43,36 +45,78 @@ const MyToys = () => {
         const description = form.description.value;
         const newToys = { photo, toyname, category, price, rating, sellername, selleremail, quantity, description }
 
-        fetch(`https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/updatetoy/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newToys)
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                fetch(`https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/updatetoy/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newToys)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setAm(data)
+                        console.log(data);
+                    })
+                Swal.fire('Update!', '', 'success')
+            }
+            else if (result.isDenied) {
+
+                Swal.fire('Changes are not Update', '', 'info')
+                return;
+            }
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                
-                
-            })
+
+
 
     }
 
     const handelDelete = id => {
-        console.log(id)
-        fetch(`https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toys/${id}`, {
-            method: "DELETE"
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                alert('user-remover')
-                const remaining = mytoys.filter(user=> user._id !== id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-                setMytoys(remaining)
+                console.log(id)
+                fetch(`https://toy-client-server-mdsahjalalrahim-gmailcom.vercel.app/toys/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Good job!',
+                                'You clicked the button!',
+                                'success'
+                            )
+                            const remaining = mytoys.filter(user => user._id !== id);
+
+                            setMytoys(remaining)
+                        }
+                    })
+
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
             }
         })
+
     }
 
 
@@ -87,6 +131,7 @@ const MyToys = () => {
                             <th></th>
                             <th>TOYS NAME</th>
                             <th>SELLER NAME</th>
+                            <th>CATEGORY</th>
                             <th>PRICE</th>
                             <th>QUANTITY</th>
                             <th>Update Action</th>
@@ -104,7 +149,7 @@ const MyToys = () => {
                                 <td>{toy.quantity}</td>
                                 <th>
                                     {/* //onClick={() => handel(toy._id)}                                   */}
-                                    <label onClick={() => setEdit(toy)} htmlFor="my-modal-5" className="btn btn-outline btn-error">Toys Update</label>
+                                    <label onClick={() => setEdit(toy)} htmlFor="my-modal-3" className="btn btn-outline btn-error">Toys Update</label>
 
                                 </th>
                                 <th>
@@ -117,92 +162,75 @@ const MyToys = () => {
                 </table>
             </div>
             {/* Put this part before </body> tag updete*/}
-            <input type="checkbox" id="my-modal-5" className="modal-toggle" />
+
+            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
-
+                    <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handelMyToy} className="w-[80%]  lg:py-10 lg:px-16 mx-auto" >
-                        <h1 className="text-3xl text-white text-center py-8 lg:py-0 font-extrabold">Add a New Toy</h1>
+                        <h1 className="text-3xl  text-center py-8 lg:py-0 font-serif">Add a New Toy</h1>
                         {/* img URL div */}
-                        <div className="md:flex mb-7">
-                            <div className="form-control md:w-full ">
+                        <div className="md:flex lg:mb-3">
+                            <div className="form-control md:w-full hidden">
                                 <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">ImageURL</h1>
+                                    <h1 className="text-xl  font-serif">ImageURL</h1>
                                 </label>
                                 <label className="input-group">
                                     <input defaultValue={edit.photo} type="text" name="photo" placeholder="ImageURL" className="input input-bordered input-accent w-full " />
-                                    <input defaultValue={edit._id} type="data" name="id" placeholder="ImageURL" className="input input-bordered input-accent w-full " />
+                                    <input hidden defaultValue={edit._id} type="data" name="id" placeholder="ImageURL" className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
                         </div>
                         {/* Toy Name and  Sub-Category*/}
-                        <div className="md:flex mb-7">
-                            <div className="form-control md:w-1/2">
-                                <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Toy Name</h1>
-                                </label>
+                        <div className="md:flex lg:mb-3">
+                            <div className="form-control md:w-1/2 hidden">
                                 <label className="input-group">
                                     <input defaultValue={edit.toyname} type="text" name="toyname" placeholder="Toy Name" className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
-                            <div className="form-control md:w-1/2 lg:ml-4">
-                                <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Sub-Category</h1>
-                                </label>
+                            <div className="form-control md:w-1/2 lg:ml-4 hidden">
                                 <label className="input-group">
                                     <input defaultValue={edit.category} type="text" name="category" placeholder="Sub-Category " className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
                         </div>
                         {/* Price and  Rating*/}
-                        <div className="md:flex mb-7">
-                            <div className="form-control md:w-1/2">
+                        <div className="md:flex lg:mb-3">
+                            <div className="form-control md:w-full">
                                 <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Price</h1>
+                                    <h1 className="text-xl font-serif">Price</h1>
                                 </label>
-                                <label className="input-group">
+                                <label className="input-group w-full">
                                     <input defaultValue={edit.price} type="text" name="price" placeholder="Price" className="input input-bordered input-accent w-full " />
+                                    <input defaultValue={edit.rating} hidden type="text" name="rating" placeholder="Rating " className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
-                            <div className="form-control md:w-1/2 lg:ml-4">
-                                <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Rating</h1>
-                                </label>
-                                <label className="input-group">
-                                    <input defaultValue={edit.rating} type="text" name="rating" placeholder="Rating " className="input input-bordered input-accent w-full " />
-                                </label>
-                            </div>
+
                         </div>
                         {/* Seller Name and Seller Email */}
-                        <div className="md:flex mb-7">
-                            <div className="form-control md:w-1/2">
-                                <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Seller Name</h1>
-                                </label>
+                        <div className="md:flex lg:mb-3 ">
+                            <div className="form-control md:w-1/2 hidden">
                                 <label className="input-group">
                                     <input defaultValue={edit.sellername} type="text" name="sellername" placeholder="Seller Name" className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
-                            <div className="form-control md:w-1/2 lg:ml-4">
-                                <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Seller Email</h1>
-                                </label>
+                            <div className="form-control md:w-1/2 lg:ml-4 hidden">
                                 <label className="input-group">
                                     <input defaultValue={edit.selleremail} type="text" name="selleremail" placeholder="Seller Email " className="input input-bordered input-accent w-full " />
                                 </label>
                             </div>
                         </div>
                         {/* Detail description and Available quantity and submit btn*/}
-                        <div className="md:flex mb-7">
+                        <div className="md:flex lg:mb-3">
                             <div className="form-control md:w-1/2">
                                 <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Detail description</h1>
+                                    <h1 className="text-xl font-serif">Detail description</h1>
                                 </label>
                                 <textarea defaultValue={edit.description} className="textarea textarea-accent lg:pb-[100px]" name="description" placeholder="Detail description"></textarea>
                             </div>
                             <div className="form-control md:w-1/2 lg:ml-4">
                                 <label className="label">
-                                    <h1 className="text-xl text-white font-extrabold">Available quantity</h1>
+                                    <h1 className="text-xl font-serif">Available quantity</h1>
                                 </label>
                                 <label className="input-group">
                                     <input defaultValue={edit.quantity} type="text" name="quantity" placeholder="Available quantity " className="input input-bordered input-accent w-full " />
@@ -215,7 +243,7 @@ const MyToys = () => {
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 };
 

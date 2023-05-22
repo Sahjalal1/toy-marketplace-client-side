@@ -5,7 +5,7 @@ const OurService = () => {
         <div className="bg-blue-400">
             <h1 className="text-xl lg:text-4xl my-5 lg:my-10 text-center">Our Service</h1>
 
-            <div className="flex gap-7">
+            <div className="lg:flex gap-7 ">
                 <div>
                     <h1>card 1 fjsdkfjslkjflsdjfljsdlkfj</h1>
                 </div>

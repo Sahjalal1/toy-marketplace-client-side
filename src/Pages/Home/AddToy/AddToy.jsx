@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+// import 'sweetalert2/src/sweetalert2.scss'
 
 
 const AddToy = () => {
@@ -27,7 +29,15 @@ const AddToy = () => {
             body: JSON.stringify(newToys)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data){
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                  )
+            }
+        })
         
     }
 
