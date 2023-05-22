@@ -79,7 +79,7 @@ const AllToys = () => {
                 <button onClick={alldata} className="btn">All Toys</button>
             </div>
 
-
+            {/* details */}
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="my-modal" className="modal-toggle" />
             <div className="modal">
