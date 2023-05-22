@@ -34,65 +34,75 @@ const ByCategory = () => {
                     </TabList>
                 </div>
 
-                <div className='my-16 grid lg:gap-4 lg:grid-cols-2'>
-                    <TabPanel>
+
+                <TabPanel>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
                         {
                             categorys.map(category =>
-                                <div key={category._id} className="card  w-[90%] mx-auto lg:w-[80%]  bg-base-100  shadow-xl">
-                                    <figure><img src={category.photo} alt="Shoes" /></figure>
-                                    <div className="card-body">
-                                        {category._id}
-                                        <h2 className="card-title">{category.toyname}</h2>
-                                        <h1>{category.price}</h1>
-                                        <p>{category.rating}</p>
-                                        <div className="card-actions justify-end">
-                                            <button className="btn btn-outline btn-error">View Details</button>
+                                <div key={category._id}>
+
+                                    <div className="card  w-[90%] mx-auto lg:w-[80%] bg-black  shadow-xl">
+                                        <figure><img className='pt-4 px-4 h-[400px]' src={category.photo} alt="Shoes" /></figure>
+                                        <div className="card-body text-white">
+                                            <h2 className="card-title"><span className='font-serif'>TitName:</span> {category.toyname}</h2>
+                                            <h1><span className='font-serif'>Price:</span> {category.price}</h1>
+                                            <p><span className='font-serif'>Rating:</span> {category.rating}</p>
+                                            <div className="card-actions justify-end">
+                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             )
                         }
-
-                    </TabPanel>
-                </div>
-                <TabPanel>
-                    {
-                        categorys.map(category =>
-                            <div key={category._id} className="card card-compact w-[40%]  bg-base-100 mt-16 lg:mt-0 shadow-xl">
-                                <figure><img src={category.photo} alt="Shoes" /></figure>
-                                <div className="card-body">
-                                    {category._id}
-                                    <h2 className="card-title">{category.toyname}</h2>
-                                    <h1>{category.price}</h1>
-                                    <p>{category.rating}</p>
-                                    <div className="card-actions justify-end">
-                                        <button className="btn btn-outline btn-error">View Details</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    {
-                        categorys.map(category =>
-                            <div key={category._id} className="card card-compact w-[40%]  bg-base-100 mt-16 lg:mt-0 shadow-xl">
-                                <figure><img src={category.photo} alt="Shoes" /></figure>
-                                <div className="card-body">
-                                    {category._id}
-                                    <h2 className="card-title">{category.toyname}</h2>
-                                    <h1>{category.price}</h1>
-                                    <p>{category.rating}</p>
-                                    <div className="card-actions justify-end">
-                                        <button className="btn btn-outline btn-error">View Details</button>
+                <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
+                        {
+                            categorys.map(category =>
+                                <div key={category._id}>
+
+                                    <div className="card  w-[90%] mx-auto lg:w-[80%] bg-black  shadow-xl">
+                                        <figure><img className='pt-4 px-4 h-[400px]' src={category.photo} alt="Shoes" /></figure>
+                                        <div className="card-body text-white">
+                                            <h2 className="card-title"><span className='font-serif'>TitName:</span> {category.toyname}</h2>
+                                            <h1><span className='font-serif'>Price:</span> {category.price}</h1>
+                                            <p><span className='font-serif'>Rating:</span> {category.rating}</p>
+                                            <div className="card-actions justify-end">
+                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    }
+                            )
+                        }
+                    </div>
+                </TabPanel>
+                <TabPanel>
+                <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
+                        {
+                            categorys.map(category =>
+                                <div key={category._id}>
+
+                                    <div className="card  w-[90%] mx-auto lg:w-[80%] bg-black  shadow-xl">
+                                        <figure><img className='pt-4 px-4 h-[400px]' src={category.photo} alt="Shoes" /></figure>
+                                        <div className="card-body text-white">
+                                            <h2 className="card-title"><span className='font-serif'>TitName:</span> {category.toyname}</h2>
+                                            <h1><span className='font-serif'>Price:</span> {category.price}</h1>
+                                            <p><span className='font-serif'>Rating:</span> {category.rating}</p>
+                                            <div className="card-actions justify-end">
+                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
                 </TabPanel>
             </Tabs>
-        </div>
+        </div >
 
 
     );
@@ -100,14 +110,3 @@ const ByCategory = () => {
 
 export default ByCategory;
 
-{/* <div onClick={() => active('remote')} className="tabs">
-<a className={`tab tab-lg tab-lifted ${activeTab == 'remote' ? "bg-black text-white" : ''}`} >remote</a>
-</div>
-<div onClick={() => active('haha')} className="tabs">
-<a className={`tab tab-lg tab-lifted ${activeTab == 'haha' ? "bg-black text-white" : ''}`} >haha</a>
-</div>
-<div className="tabs">
-<a  className="tab tab-lg tab-lifted">Large</a>
-<a className="tab tab-lg tab-lifted tab-active">Large</a>
-<a className="tab tab-lg tab-lifted">Large</a>
-</div> */}
