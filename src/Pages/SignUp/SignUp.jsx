@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const auth = getAuth(app)
 
@@ -23,6 +24,12 @@ const SignUp = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                )
+
                 navigate(from)
             })
             .catch(error => console.log(error))
@@ -42,10 +49,16 @@ const SignUp = () => {
             .then(result => {
                 const loggedUser = result.user;
                 updateUserData(loggedUser, name, photoURL)
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                )
+
                 navigate(from)
                 form.reset()
             })
-            .catch(error=> console.log(error))
+            .catch(error => console.log(error))
     }
     return (
         <div className="hero min-h-screen bg-base-200">

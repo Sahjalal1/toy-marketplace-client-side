@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Swal from 'sweetalert2';
 // import { AuthContext } from '../../../../Providers/AuthProviders';
 
 const ByCategory = () => {
@@ -19,6 +20,18 @@ const ByCategory = () => {
 
     }, [tavcategry]);
     // console.log(categorys._id)
+
+    const haha = () => {
+        Swal.fire({
+            title: 'This Page Not Created',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    }
 
     return (
 
@@ -48,7 +61,7 @@ const ByCategory = () => {
                                             <h1><span className='font-serif'>Price:</span> {category.price}</h1>
                                             <p><span className='font-serif'>Rating:</span> {category.rating}</p>
                                             <div className="card-actions justify-end">
-                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                                <button onClick={() => haha()} className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +71,7 @@ const ByCategory = () => {
                     </div>
                 </TabPanel>
                 <TabPanel>
-                <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
                         {
                             categorys.map(category =>
                                 <div key={category._id}>
@@ -70,7 +83,7 @@ const ByCategory = () => {
                                             <h1><span className='font-serif'>Price:</span> {category.price}</h1>
                                             <p><span className='font-serif'>Rating:</span> {category.rating}</p>
                                             <div className="card-actions justify-end">
-                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                                <button onClick={() => haha()} className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +93,7 @@ const ByCategory = () => {
                     </div>
                 </TabPanel>
                 <TabPanel>
-                <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 mt-5'>
                         {
                             categorys.map(category =>
                                 <div key={category._id}>
@@ -92,7 +105,7 @@ const ByCategory = () => {
                                             <h1><span className='font-serif'>Price:</span> {category.price}</h1>
                                             <p><span className='font-serif'>Rating:</span> {category.rating}</p>
                                             <div className="card-actions justify-end">
-                                                <button className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
+                                                <button onClick={() => haha()} className="px-4 py-3 border-2 text-[#52fff3] border-[#52fff3] hover:bg-[#52fff3] hover:text-black rounded-md">View Details</button>
                                             </div>
                                         </div>
                                     </div>
